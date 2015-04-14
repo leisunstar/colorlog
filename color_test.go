@@ -1,4 +1,4 @@
-package color
+package colorlog
 
 import "testing"
 
