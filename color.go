@@ -77,19 +77,27 @@ func textColor(color int, str string) string {
     }
 }
 
-func Info(format string, a ...interface{}){
+type ColorLog struct {
+
+}
+
+func NewColorLog()(*ColorLog){
+    return &ColorLog{}
+}
+
+func (this *ColorLog)Info(format string, a ...interface{}){
     fmt.Println(textColor(TextWhite, fmt.Sprintf("info:%s", fmt.Sprintf(format, a))))
 }
 
-func Debug(format string, a ...interface{}){
+func (this *ColorLog)Debug(format string, a ...interface{}){
     fmt.Println(textColor(TextGreen, fmt.Sprintf("debug:%s", fmt.Sprintf(format, a))))
 }
 
-func Warning(format string, a ...interface{}){
+func (this *ColorLog)Warning(format string, a ...interface{}){
     fmt.Println(textColor(TextYellow, fmt.Sprintf("warning:%s", fmt.Sprintf(format, a))))
 }
 
-func Error(format string, a ...interface{}){
+func (this *ColorLog) Error(format string, a ...interface{}){
     fmt.Println(textColor(TextRed, fmt.Sprintf("error:%s", fmt.Sprintf(format, a))))
 }
 
