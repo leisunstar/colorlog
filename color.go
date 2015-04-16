@@ -3,6 +3,7 @@ package colorlog
 import (
 	"fmt"
 	"runtime"
+	"time"
 )
 
 const (
@@ -19,6 +20,10 @@ const (
 	Debug
 	Error
 	Info
+)
+
+var (
+	dateTimeFmt = "2006-01-02 15:04:05"
 )
 
 func Black(str string) string {
@@ -118,7 +123,8 @@ func (this *ColorLog) println(logType int, format string, a ...interface{}) {
 		d = TextYellow
 		s = "warning"
 	}
-	fmt.Println(textColor(d, fmt.Sprintf("%s:%s", s, fmt.Sprintf(format, a...))))
+	pc, _, line, _ := runtime.Caller(3)
+	fmt.Println(textColor(d, fmt.Sprintf("%s[%s][%s:%d]%s", time.Now().Format(dateTimeFmt), s, runtime.FuncForPC(pc).Name(), line, fmt.Sprintf(format, a...))))
 }
 
 func IsWindows() bool {
