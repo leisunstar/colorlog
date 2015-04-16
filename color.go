@@ -109,22 +109,22 @@ func (this *ColorLog) Error(format string, a ...interface{}) {
 }
 
 func (this *ColorLog) println(logType int, format string, a ...interface{}) {
-	s := "info"
+	s := "INFO   "
 	d := TextWhite
 	switch logType {
 	case Info:
 	case Debug:
-		s = "debug"
+		s = "DEBUG  "
 		d = TextGreen
 	case Error:
-		s = "error"
+		s = "ERROR  "
 		d = TextRed
 	case Warning:
 		d = TextYellow
-		s = "warning"
+		s = "WARNING"
 	}
 	pc, _, line, _ := runtime.Caller(3)
-	fmt.Println(textColor(d, fmt.Sprintf("%s[%s][%s:%d]%s", time.Now().Format(dateTimeFmt), s, runtime.FuncForPC(pc).Name(), line, fmt.Sprintf(format, a...))))
+	fmt.Println(fmt.Sprintf("%s[%s][%s:%d]", time.Now().Format(dateTimeFmt), s, runtime.FuncForPC(pc).Name(), line), textColor(d, fmt.Sprintf(format, a...)))
 }
 
 func IsWindows() bool {
